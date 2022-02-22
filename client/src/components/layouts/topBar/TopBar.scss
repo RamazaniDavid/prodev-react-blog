@@ -1,0 +1,80 @@
+.top {
+  width: 100%;
+  height: 60px;
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  font-family: "Josefin Sans", sans-serif;
+  text-align: center;
+  padding: 10px 0px;
+  background-color: #898f9c;
+  color: #fff;
+}
+
+.topLeft {
+  flex: 3;
+}
+
+.topSocialIcon > .socialIcon {
+  margin-right: 10px;
+  font-size: 16pt;
+  cursor: pointer;
+}
+
+.topSocialIcon .facebook :hover {
+  color: #4267b2;
+}
+
+.topSocialIcon .pinterest :hover {
+  color: #e60023;
+}
+
+.topSocialIcon .twitter :hover {
+  color: #1da1f2;
+}
+
+.topSocialIcon .linkedIn :hover {
+  color: #2867b2;
+}
+
+.topSocialIcon .instagram :hover {
+  background: radial-gradient(
+    circle at 30% 107%,
+    #fdf497 0%,
+    #fdf497 5%,
+    #fd5949 45%,
+    #d6249f 60%,
+    #285aeb 90%
+  );
+}
+
+.topCenter {
+  flex: 6;
+}
+
+.topRight {
+  flex: 3;
+}
+
+.topRight img {
+  border-radius: 50%;
+  max-width: 48px;
+  max-height: 48px;
+  border: solid 1px;
+  object-fit: cover;
+}
+
+.topList {
+  display: flex;
+  list-style-type: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0%;
+}
+
+.topListItem {
+  margin-right: 20px;
+  font-size: 18px;
+  cursor: pointer;
+}
