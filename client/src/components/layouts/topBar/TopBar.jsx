@@ -4,14 +4,13 @@ import {
   FaPinterest,
   FaInstagram,
   FaTwitter,
-  FaHome,
-  FaInfo,
-  FaPencilAlt,
   FaLinkedin,
 } from "react-icons/fa";
-import { MdConnectWithoutContact } from "react-icons/md";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const TopBar = () => {
+  const [user, setUser] = useState(null);
   return (
     <div className="top">
       <div className="topLeft">
@@ -26,27 +25,42 @@ const TopBar = () => {
       <div className="topCenter">
         <ul className="topList">
           <li className="topListItem">
-            <FaHome /> Home
+            <Link to="/">Home</Link>
           </li>
           <li className="topListItem">
-            <FaInfo /> About
+            <Link to="/About">About</Link>
           </li>
           <li className="topListItem">
-            <MdConnectWithoutContact /> Contact
+            <Link to="/Contact">Contact</Link>
           </li>
           <li className="topListItem">
-            <FaPencilAlt />
-            Write
+            <Link to="/Write">Write</Link>
           </li>
         </ul>
       </div>
       <div className="topRight">
-        <div className="topRightItem">
-          <img
-            src="https://avatars.githubusercontent.com/u/20882578?v=4"
-            alt="profile"
-          />
-        </div>
+        {user ? (
+          <Link to="/settings">
+            <img
+              className="topImg"
+              src="https://avatars.githubusercontent.com/u/20882578?v=4"
+              alt=""
+            />
+          </Link>
+        ) : (
+          <ul className="topList">
+            <li className="topListItem">
+              <Link className="link" to="/login">
+                LOGIN
+              </Link>
+            </li>
+            <li className="topListItem">
+              <Link className="link" to="/register">
+                REGISTER
+              </Link>
+            </li>
+          </ul>
+        )}
       </div>
     </div>
   );
