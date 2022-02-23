@@ -1,7 +1,7 @@
 import React from "react";
 import Posts from "../../components/dataContainers/posts/Posts";
 import Header from "../../components/layouts/header/Header";
-import SideBar from "../../components/layouts/sideBar/SideBar";
+import Sidebar from "../../components/layouts/sidebar/Sidebar";
 import "./Home.scss";
 const Home = (props) => {
   return (
@@ -10,7 +10,7 @@ const Home = (props) => {
 
       <div className="home">
         <Posts />
-        <SideBar />
+        <Sidebar />
       </div>
     </>
   );

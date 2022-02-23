@@ -10,7 +10,7 @@ const Header = (props) => {
       </div>
       <img
         className="headerImage"
-        src="assets/images/header/header01.jpg"
+        src="https://picsum.photos/1200/1300"
         alt="header"
       />
     </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import "./SideBar.scss";
+import "./Sidebar.scss";
 import {
   FaFacebook,
   FaInstagram,
@@ -8,7 +8,7 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 
-const SideBar = () => {
+const Sidebar = () => {
   return (
     <>
       <div className="sidebar">
@@ -55,4 +55,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+export default Sidebar;
