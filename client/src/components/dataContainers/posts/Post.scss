@@ -50,6 +50,7 @@
 }
 
 .postDesc {
+  display: block;
   font-family: "Varela Round", sans-serif;
   font-size: 14px;
   color: #444;
@@ -60,4 +61,11 @@
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
+}
+
+.postDesc::first-letter {
+  margin-left: 20px;
+  font-size: 130px;
+  font-weight: 600;
+  color: #be9656;
 }

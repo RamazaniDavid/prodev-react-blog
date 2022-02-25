@@ -1,27 +1,26 @@
 import React from "react";
 import "./Post.scss";
-import { FaCalendarAlt } from "react-icons/fa";
 
-const Post = () => {
+const Post = ({ post }) => {
   return (
     <>
       <div className="post">
-        <img
-          src="https://picsum.photos/200/300"
-          className="postImg"
-          alt="post"
-        />
+        <img src={post.photo.url} className="postImg" alt="post" />
         <div className="postInfo">
           <div className="postCats">
-            <div className="postCat">Music</div>
-            <div className="postCat">Life</div>
+            {post.categories.map((cat,i) => (
+              <div className="postCat" key={i}>
+                {cat.name}
+              </div>
+            ))}
           </div>
-          <span className="postTitle">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          </span>
+          <span className="postTitle">{post.title}</span>
           <hr />
-          <span className="postDate">5 days ago</span>
+          <span className="postDate">
+            {new Date(post.createdAt).toDateString()}
+          </span>
         </div>
+        <p className="postDesc">{post.desc}</p>
       </div>
     </>
   );
