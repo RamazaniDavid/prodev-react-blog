@@ -21,11 +21,11 @@ const checkIfAuthenticated = (req, res, next) => {
         if (err) {
           return res.status(401).json({ error: "Unauthorized" });
         }
-        if (!decoded.isVerified) {
-          return res.status(401).json({ error: "Your Email Not Verified" });
-        }
-        const _user = await User.findById(decoded._id);
+        const _user = await User.findById(decoded.id);
         if (_user) {
+          if (!_user.isVerified) {
+            return res.status(401).json({ error: "Your Email Not Verified" });
+          }
           const { password, ...user } = _user.toObject();
           req.user = user;
           req.isAdmin = req.user.roles.includes("admin");

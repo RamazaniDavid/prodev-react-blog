@@ -7,10 +7,14 @@ import {
   FaLinkedin,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useUser } from "../../../hooks/useUser";
+import useDispatch from "../../../hooks/useDispatch";
+import { Logout } from "../../../store/Actions";
 
 const TopBar = () => {
-  const [user, setUser] = useState(null);
+  const user = useUser();
+  const dispatch = useDispatch();
+
   return (
     <div className="top">
       <div className="topLeft">
@@ -36,6 +40,21 @@ const TopBar = () => {
           <li className="topListItem">
             <Link to="/Write">Write</Link>
           </li>
+          {user && (
+            <>
+              <li className="topListItem">
+                <Link to="/settings">Profile</Link>
+              </li>
+              <li
+                className="topListItem"
+                onClick={() => {
+                  dispatch(Logout());
+                }}
+              >
+                Logout
+              </li>
+            </>
+          )}
         </ul>
       </div>
       <div className="topRight">
@@ -43,7 +62,7 @@ const TopBar = () => {
           <Link to="/settings">
             <img
               className="topImg"
-              src="https://avatars.githubusercontent.com/u/20882578?v=4"
+              src={user.photoURL ?? "https://picsum.photos/200/200?grayscale"}
               alt=""
             />
           </Link>

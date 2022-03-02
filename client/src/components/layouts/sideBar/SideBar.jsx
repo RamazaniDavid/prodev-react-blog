@@ -7,8 +7,28 @@ import {
   FaPinterest,
   FaTwitter,
 } from "react-icons/fa";
+import { useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
+  const [categories, setCategories] = React.useState([]);
+
+  useEffect(() => {
+    let abortController = new AbortController();
+
+    const getCategories = async () => {
+      const res = await axios.get("/api/categories");
+      setCategories(res.data.model.categories);
+    };
+
+    getCategories();
+
+    return () => {
+      abortController.abort();
+    };
+  }, []);
+
   return (
     <>
       <div className="sidebar">
@@ -26,18 +46,11 @@ const Sidebar = () => {
         <div className="sidebarItem">
           <span className="sidebarTitle">Categories</span>
           <ul className="sidebarList">
-            <li className="sidebarListItem">
-              <a href="#">Web Development</a>
-            </li>
-            <li className="sidebarListItem">
-              <a href="#">Mobile Development</a>
-            </li>
-            <li className="sidebarListItem">
-              <a href="#">UI/UX Design</a>
-            </li>
-            <li className="sidebarListItem">
-              <a href="#">Data Science</a>
-            </li>
+            {categories.map((category, i) => (
+              <li key={i} className="sidebarListItem">
+                <Link to={`/Home?cat=${category.name}`}>{category.name}</Link>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="sidebarItem">

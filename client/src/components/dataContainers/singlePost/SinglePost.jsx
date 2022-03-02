@@ -1,38 +1,50 @@
 import React from "react";
 import { FaCalendarAlt, FaEdit, FaTrash } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../../../hooks/useUser";
 import "./SinglePost.scss";
+import axios from "axios";
 
-const SinglePost = () => {
+const SinglePost = ({ post }) => {
+  const user = useUser();
+
+  const nav = useNavigate();
+
+  const handleDelete = async () => {
+    const response = await axios.delete(`/api/posts/${post._id}`);
+    if (response.status === 200 && response.data.success) {
+      nav("/");
+    }
+  };
+
+  if (!post) return null;
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
-        <img
-          src="https://picsum.photos/1200/1300"
-          className="singlePostImg"
-          alt="post"
-        />
+        {post.photo && (
+          <img src={post.photo.url} className="singlePostImg" alt="post" />
+        )}
         <h1 className="singlePostTitle">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          <div className="siglePostEdit">
-            <FaEdit className="singlePostIcon" />
-            <FaTrash className="singlePostIcon" />
-          </div>
+          {post.title}
+          {user && user.username === post.username && (
+            <div className="siglePostEdit">
+              <FaEdit className="singlePostIcon" />
+              <FaTrash className="singlePostIcon" onClick={handleDelete} />
+            </div>
+          )}
         </h1>
         <div className="singlePostInfo">
           <span className="singlePostAuthor">
-            Author : <b>David</b>
+            <Link to={`/home?user=${post.username}`}>
+              Author : <b>David</b>
+            </Link>
           </span>
           <span className="singlePostDate">
-            <FaCalendarAlt className="singlePostIcon" />5 days ago
+            <FaCalendarAlt className="singlePostIcon" />
+            {new Date(post.createdAt).toDateString()}
           </span>
         </div>
-        <p className="singlePostDesc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-          quisquam, quisquam quisquam. Lorem, ipsum dolor sit amet consectetur
-          adipisicing elit. Ad, illo officia optio inventore doloribus quam
-          mollitia facilis natus quisquam commodi nobis qui reiciendis
-          consectetur, esse, quasi quibusdam obcaecati atque aperiam!
-        </p>
+        <p className="singlePostDesc">{post.desc}</p>
       </div>
     </div>
   );

@@ -12,6 +12,11 @@ const UserSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    verificationString: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     password: {
       type: String,
       required: true,
@@ -21,7 +26,7 @@ const UserSchema = new mongoose.Schema(
       required: true,
     },
     info: {
-      type: Array,
+      type: Object,
     },
 
     roles: {

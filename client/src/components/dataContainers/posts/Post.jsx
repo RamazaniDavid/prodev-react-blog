@@ -1,20 +1,25 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Post.scss";
 
 const Post = ({ post }) => {
   return (
     <>
       <div className="post">
-        <img src={post.photo.url} className="postImg" alt="post" />
+        {post.photo && (
+          <img src={post.photo.url} className="postImg" alt="post" />
+        )}
         <div className="postInfo">
           <div className="postCats">
-            {post.categories.map((cat,i) => (
+            {post.categories.map((cat, i) => (
               <div className="postCat" key={i}>
                 {cat.name}
               </div>
             ))}
           </div>
-          <span className="postTitle">{post.title}</span>
+          <Link to={`/post/${post._id}`}>
+            <span className="postTitle">{post.title}</span>
+          </Link>
           <hr />
           <span className="postDate">
             {new Date(post.createdAt).toDateString()}

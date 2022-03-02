@@ -12,3 +12,13 @@ a:focus {
   text-decoration: none;
   color: inherit;
 }
+
+input {
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+}

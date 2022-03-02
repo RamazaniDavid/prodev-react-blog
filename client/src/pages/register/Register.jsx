@@ -1,30 +1,60 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Register.scss";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import registerSchema from "./register.schema";
+import {FormInputErrors} from "../../shared/formInputErrors";
+import axios from "axios";
+import debounce from "lodash/debounce";
 
 const Register = () => {
+  const nav = useNavigate();
+  const form = useForm({
+    mode: "onSubmit",
+    reValidateMode: "onChange",
+    defaultValues: {},
+    resolver: yupResolver(registerSchema),
+    criteriaMode: "all",
+    shouldFocusError: true,
+    shouldUnregister: false,
+    shouldUseNativeValidation: false,
+    delayError: 2000,
+  });
+
   return (
     <div className="register">
       <span className="registerTitle">Register</span>
-      <form className="registerForm">
+      <form
+        className="registerForm"
+        onSubmit={form.handleSubmit(async (d) => {
+          let res = await axios.post("/api/auth/register", d);
+          if (res.data.success) {
+            form.reset();
+            nav("/emailSent", { replace: true });
+          }
+        })}
+      >
         <label>Username</label>
-        <input
-          type="text"
-          className="registerInput"
-          placeholder="Enter your username..."
-        />
+        <input className="registerInput" {...form.register("username")} />
+        <FormInputErrors error={form.formState.errors.username} />
         <label>Email</label>
-        <input
-          type="text"
-          className="registerInput"
-          placeholder="Enter your email..."
-        />
+        <input className="registerInput" {...form.register("email")} />
+        <FormInputErrors error={form.formState.errors.email} />
         <label>Password</label>
         <input
           type="password"
           className="registerInput"
-          placeholder="Enter your password..."
+          {...form.register("password")}
         />
+        <FormInputErrors error={form.formState.errors.password} />
+        <label>Confirm Password</label>
+        <input
+          className="registerInput"
+          type="password"
+          {...form.register("confirmPassword")}
+        />
+        <FormInputErrors error={form.formState.errors.confirmPassword} />
         <button className="registerButton" type="submit">
           Register
         </button>
