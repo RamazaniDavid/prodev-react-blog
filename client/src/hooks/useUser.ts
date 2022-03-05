@@ -1,11 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import { Context } from "../store/Context";
+import AppCtx from "../store/Context";
 
 export const useUser = () => {
   // const [token] = useToken();
-  const {state:{token}} =useContext(Context)
+  const {
+    state: {
+      login: { token },
+    },
+  } = useContext(AppCtx);
 
-  const getPayload = (token) => {
+  const getPayload = (token: string) => {
     const base64Url = token.split(".")[1];
     return JSON.parse(atob(base64Url));
   };

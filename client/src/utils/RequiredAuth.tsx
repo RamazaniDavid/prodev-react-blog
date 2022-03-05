@@ -1,7 +1,8 @@
+import { FunctionComponent } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useUser } from "../hooks/useUser";
 
-const RequireAuth = ({ children }) => {
+const RequireAuth:FunctionComponent<{children:any}> = ({ children }) => {
   let user = useUser();
   let location = useLocation();
 

@@ -3,14 +3,16 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import loginSchema from "./login.schema";
+import  {loginSchema, LoginFormInputs } from "./login.schema";
 import "./Login.scss";
-import { Context } from "../../store/Context";
-import { LoginFail, LoginStart, LoginSuccess } from "../../store/Actions";
-import { FormInputErrors } from "../../shared/formInputErrors";
+import AppCtx from "../../store/Context";
+import { LoginFailure, LoginStart, LoginSuccess } from "../../store/Actions";
+import { FormInputErrors } from "../../shared/formInputErrors/FormInputErrors";
 
 const Login = () => {
-  const form = useForm({
+  
+
+  const form = useForm<LoginFormInputs>({
     mode: "onSubmit",
     reValidateMode: "onChange",
     defaultValues: {},
@@ -22,7 +24,7 @@ const Login = () => {
     delayError: 2000,
   });
 
-  const { state, dispatch } = React.useContext(Context);
+  const { state, dispatch } = React.useContext(AppCtx);
 
   useEffect(() => {
    
@@ -36,12 +38,12 @@ const Login = () => {
       <form
         className="loginForm"
         onSubmit={form.handleSubmit(async (d) => {
-          dispatch(LoginStart(d));
+          dispatch(LoginStart());
           try {
             const res = await axios.post("/api/Auth/login", d);
             dispatch(LoginSuccess(res.data.model.token));
           } catch (err) {
-            dispatch(LoginFail(err));
+            dispatch(LoginFailure(err));
           }
         })}
       >
@@ -63,7 +65,7 @@ const Login = () => {
         <button
           className="loginButton"
           type="submit"
-          disabled={state.isFetching}
+          disabled={state.login.isFetching}
         >
           Login
         </button>

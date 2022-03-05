@@ -1,16 +1,15 @@
 import React from "react";
 import "./Write.scss";
 import { FaPlus } from "react-icons/fa";
-import writeSchema from "./write.schema";
+import { writeSchema, WriteFormInputs } from "./write.schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { FormErrors } from "../../shared/formInputErrors";
+import { FormErrors } from "../../shared/formInputErrors/FormInputErrors";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
-const Write = (props) => {
-  const form = useForm({
+const Write = () => {
+  const form = useForm<WriteFormInputs>({
     mode: "onSubmit",
     reValidateMode: "onChange",
     defaultValues: {},
@@ -22,9 +21,8 @@ const Write = (props) => {
     delayError: 2000,
   });
   const nav = useNavigate();
-  const [imgUrl, setImgUrl] = React.useState(null);
 
-  const selectedFile = form.watch("file");
+  const selectedFile:any = form.watch("file");
 
   return (
     <>
@@ -48,7 +46,7 @@ const Write = (props) => {
         )}
         <form
           className="writeForm"
-          onSubmit={form.handleSubmit(async (d) => {
+          onSubmit={form.handleSubmit(async (d:any) => {
             const { file, ...rest } = d;
             const formData = new FormData();
             formData.append("file", file[0]);
@@ -84,7 +82,6 @@ const Write = (props) => {
           </div>
           <div className="writeFormGroup">
             <textarea
-              type="text"
               {...form.register("desc")}
               className="writeInput writeText"
               placeholder="Tell your story..."

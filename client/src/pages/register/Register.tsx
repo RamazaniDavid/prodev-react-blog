@@ -3,14 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Register.scss";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import registerSchema from "./register.schema";
-import {FormInputErrors} from "../../shared/formInputErrors";
+import  {registerSchema, RegisterFormInputs } from "./register.schema";
+import {FormInputErrors} from "../../shared/formInputErrors/FormInputErrors";
 import axios from "axios";
-import debounce from "lodash/debounce";
 
 const Register = () => {
   const nav = useNavigate();
-  const form = useForm({
+  const form = useForm<RegisterFormInputs>({
     mode: "onSubmit",
     reValidateMode: "onChange",
     defaultValues: {},

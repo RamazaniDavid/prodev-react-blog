@@ -7,7 +7,15 @@ const uploadFile = async (file, pathName) => {
   const snapshot = await fileRef.put(file.buffer);
   const url = await snapshot.ref.getDownloadURL();
   return {
-    url,
+    url: url.replace(
+      "https://firebasestorage.googleapis.com/",
+      "/api/proxy/gl_fbs/"
+    ),
+    proxyUrl: url.replace(
+      "https://firebasestorage.googleapis.com/",
+      "https://px.ramazanidavid.info/api/proxy/gl_fbs/"
+    ),
+    orginalUrl: url,
     fileFullName: `${pathName}/${fileName}`,
   };
 };

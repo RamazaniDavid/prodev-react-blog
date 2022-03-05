@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import axios from "axios";
 
-const registerSchema = yup
+export const registerSchema = yup
   .object()
   .shape({
     username: yup
@@ -34,4 +34,9 @@ const registerSchema = yup
   })
   .required();
 
-export default registerSchema;
+export type RegisterFormInputs = {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};

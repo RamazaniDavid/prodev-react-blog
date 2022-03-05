@@ -1,17 +1,17 @@
 import express from "express";
-import cors from "cors";
 import bodyParser from "body-parser";
 import config from "./config";
 import mongoose from "mongoose";
-
 import cookieParser from "cookie-parser";
 import logger from "morgan";
+var createError = require("http-errors");
 
 // import routes
 import AuthRouter from "./routes/AuthRoutes";
 import UserRouter from "./routes/UserRoutes";
 import CategoryRouter from "./routes/CategoryRoutes";
 import PostRouter from "./routes/PostRoutes";
+import ProxyRouter from "./routes/ProxyRoutes";
 
 // connect to mongoDB
 mongoose
@@ -23,7 +23,6 @@ mongoose
   .catch((err) => console.log(err));
 
 const app = express();
-const appRouter = express.Router();
 // middlewares
 //app.use(cors());
 app.use((req, res, next) => {
@@ -47,6 +46,7 @@ app.use("/api/auth", AuthRouter);
 app.use("/api/users", UserRouter);
 app.use("/api/categories", CategoryRouter);
 app.use("/api/posts", PostRouter);
+app.use("/api/proxy", ProxyRouter);
 
 // // catch 404 and forward to error handler
 // app.use(function (req, res, next) {

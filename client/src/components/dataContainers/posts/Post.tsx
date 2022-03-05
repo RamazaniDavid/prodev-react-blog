@@ -1,17 +1,17 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
 import "./Post.scss";
 
-const Post = ({ post }) => {
+const Post:FunctionComponent<{post:any}> = ({ post }) => {
   return (
     <>
       <div className="post">
         {post.photo && (
-          <img src={post.photo.url} className="postImg" alt="post" />
+          <img src={post.photo.proxyUrl} className="postImg" alt="post" />
         )}
         <div className="postInfo">
           <div className="postCats">
-            {post.categories.map((cat, i) => (
+            {post.categories.map((cat:any, i:number) => (
               <div className="postCat" key={i}>
                 {cat.name}
               </div>

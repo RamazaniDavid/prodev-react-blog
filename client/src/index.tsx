@@ -5,18 +5,18 @@ import App from "./App";
 import { errorInterceptor } from "./helpers/error.interceptor";
 import { jwtInterceptor } from "./helpers/jwt.interceptor";
 import "./index.scss";
-import { ContextProvider } from "./store/Context";
+import { AppCtxProvider } from "./store/ContextProvider";
 
 jwtInterceptor();
 errorInterceptor();
 
 ReactDOM.render(
   <React.StrictMode>
-    <ContextProvider>
+    <AppCtxProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </ContextProvider>
+    </AppCtxProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

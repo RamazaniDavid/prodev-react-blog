@@ -1,4 +1,3 @@
-import React from "react";
 import TopBar from "./components/layouts/topBar/TopBar";
 import Home from "./pages/home/Home";
 import Register from "./pages/register/Register";
@@ -11,7 +10,6 @@ import NotFound from "./pages/notFound/NotFound";
 import EmailVerification from "./pages/emailVerification/EmailVerification";
 import EmailSent from "./pages/emailVerification/EmailSent";
 import { useUser } from "./hooks/useUser";
-import { jwtInterceptor } from "./helpers/jwt.interceptor";
 
 function App() {
 
@@ -21,8 +19,8 @@ function App() {
     <>
       <TopBar />
       <Routes>
-        <Route exact path="/" element={<Home />}></Route>
-        <Route exact path="/home" element={<Home />}></Route>
+        <Route  path="/" element={<Home />}></Route>
+        <Route path="/home" element={<Home />}></Route>
         <Route
           path="/register"
           element={user ? <Home /> : <Register />}

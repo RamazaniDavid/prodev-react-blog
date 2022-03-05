@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { Context } from "../store/Context";
+import AppCtx from "../store/Context";
 
 const useDispatch = () => {
-  const { dispatch } = useContext(Context);
+  const { dispatch } = useContext(AppCtx);
   if (!dispatch) {
     throw new Error("useDispatch must be used within a Provider");
   }

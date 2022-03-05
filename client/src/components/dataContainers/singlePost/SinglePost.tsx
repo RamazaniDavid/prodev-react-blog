@@ -1,11 +1,11 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import { FaCalendarAlt, FaEdit, FaTrash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser";
 import "./SinglePost.scss";
 import axios from "axios";
 
-const SinglePost = ({ post }) => {
+const SinglePost :FunctionComponent<{post:any}>= ({ post }) => {
   const user = useUser();
 
   const nav = useNavigate();
@@ -22,7 +22,7 @@ const SinglePost = ({ post }) => {
     <div className="singlePost">
       <div className="singlePostWrapper">
         {post.photo && (
-          <img src={post.photo.url} className="singlePostImg" alt="post" />
+          <img src={post.photo.proxyUrl} className="singlePostImg" alt="post" />
         )}
         <h1 className="singlePostTitle">
           {post.title}

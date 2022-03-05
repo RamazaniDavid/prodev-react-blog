@@ -4,7 +4,7 @@
 
 import app from "./src/app";
 import config from "./src/config";
-import debug from "debug";
+var debug = require("debug")("api:server");
 
 const port = normalizePort(config.port || 3001);
 
@@ -64,5 +64,7 @@ function onError(error) {
 function onListening() {
   var addr = server.address();
   var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
+  console.log("Listening on " + bind);
+  console.log(addr);
   debug("Listening on " + bind);
 }
